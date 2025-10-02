@@ -18,12 +18,22 @@
   <body>
     <div class="container mt-5 p-5 border rounded">
 
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success text-center mb-3">
+        {{message}}
+      </div>
+      {% endfor %}
+    {% endif %}
+
+
         <div class="d-flex justify-content-between align-items-center">
             <a href="" data-bs-toggle="modal" data-bs-target="#addStudentModal" class="btn btn-primary px-4 py-2 btn-sm">Add new student</a>
             <div >
                 <form action="" method="post" class = "d-flex">
-                    <input type="search" name = "search" class="form-control" placeholder="Search...">
-                    <button class = "btn btn-success mx-2">Search</button> 
+                  {% csrf_token %}
+                    <input type="search" value="{{query}}" name = "searchquery" class="form-control" placeholder="Search...">
+                    <button class = "btn btn-success mx-2" name = "search">Search</button> 
                 </form>
             </div>
         </div>
@@ -73,7 +83,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name = "update">Add new student</button>
+        <button type="submit" class="btn btn-primary" name = "update">Update new student</button>
       </div>
     </div>
    </form>
